@@ -1,0 +1,7 @@
+.ul {
+  list-style-type: none;
+  width: 500px;
+  margin-left: calc(50% - 250px);
+  margin-top: 70px;
+  padding: 0px;
+}

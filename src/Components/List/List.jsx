@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from './List.module.css';
 import Todo from '../Todo/Todo.jsx';
 import guid from '../../Guid.js';
+import UpdateContainer from '../Update/UpdateContainer';
+
+export let openUpdate; 
 
 let List = (props) => {
+
+const [isUpdate, setIsUpdate] = useState(false);
+
+openUpdate = setIsUpdate;
 
   const initialState = {
     todos:[
@@ -20,14 +27,28 @@ let List = (props) => {
     })
   }
 
+  let openModalChange = (id, title, text) => {
+    setIsUpdate(true);
+    props.changeID(id);
+    props.changeTitleField(title);
+    props.changeTextField(text);
+  }
+
   let todos = props.todos.map((todo) => {
-      return (<Todo key={todo.id} id={todo.id} title={todo.title} text={todo.text} removeTodo={props.removeTodo}/>)
+      return (<Todo key={todo.id} id={todo.id} 
+                    title={todo.title} text={todo.text} 
+                    removeTodo={props.removeTodo} openModalChange={openModalChange}/>)
   })
 
     return (
-      <ul className={s.ul}>
-          {todos}
-      </ul>
+      <div>
+        <ul className={s.ul}>
+            {todos}
+        </ul>
+        {isUpdate && (
+          <UpdateContainer />
+        )}
+      </div>
     )
 }
 

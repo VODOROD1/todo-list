@@ -4,3 +4,6 @@
 ## For what project
 #### This project was developed for mastering javaScript, react, redux.
 
+## Launch project
+`npm init` 
+`npm start`
